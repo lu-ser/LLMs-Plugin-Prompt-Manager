@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Manager - Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>🤖 LLM Prompt Manager Settings</h1>
+            <p>Customize your prompt management experience</p>
+        </div>
+
+        <div class="settings-content">
+            <div class="settings-section">
+                <h2>General Settings</h2>
+                
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="auto-save" class="setting-checkbox">
+                        <span class="checkmark"></span>
+                        Auto-save prompts when sending messages
+                    </label>
+                    <p class="setting-description">Automatically save prompts when you send them in chat</p>
+                </div>
+
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="show-notifications" class="setting-checkbox" checked>
+                        <span class="checkmark"></span>
+                        Show notifications
+                    </label>
+                    <p class="setting-description">Display success/error notifications when saving prompts</p>
+                </div>
+
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="button-tooltips" class="setting-checkbox" checked>
+                        <span class="checkmark"></span>
+                        Show button tooltips
+                    </label>
+                    <p class="setting-description">Display helpful tooltips when hovering over buttons</p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Supported Sites</h2>
+                <p class="section-description">Manage which sites the extension is active on. You can add custom sites or disable existing ones.</p>
+                
+                <div id="sites-list" class="sites-list">
+                    <!-- Sites will be populated by JavaScript -->
+                </div>
+                
+                <div class="add-site-section">
+                    <h3>Add Custom Site</h3>
+                    <div class="add-site-form">
+                        <input type="text" id="site-url" placeholder="https://example.com" class="site-input">
+                        <input type="text" id="site-name" placeholder="Site Name" class="site-input">
+                        <button id="add-site-btn" class="btn btn-primary">Add Site</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Prompt Management</h2>
+                
+                <div class="setting-item">
+                    <label class="setting-label">
+                        Max saved prompts:
+                        <input type="number" id="max-prompts" min="50" max="1000" value="500" class="setting-input">
+                    </label>
+                    <p class="setting-description">Maximum number of prompts to keep saved (oldest will be deleted)</p>
+                </div>
+
+                <div class="setting-item">
+                    <label class="setting-label">
+                        Default tags (comma separated):
+                        <input type="text" id="default-tags" placeholder="work, creative, research" class="setting-input">
+                    </label>
+                    <p class="setting-description">Tags that will be automatically applied to new prompts</p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Data Management</h2>
+                
+                <div class="data-actions">
+                    <button id="export-all-btn" class="btn btn-secondary">
+                        📤 Export All Data
+                    </button>
+                    <button id="import-data-btn" class="btn btn-secondary">
+                        📥 Import Data
+                    </button>
+                    <button id="clear-all-btn" class="btn btn-danger">
+                        🗑️ Clear All Data
+                    </button>
+                </div>
+                
+                <div class="data-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-prompts-stat">0</div>
+                        <div class="stat-label">Total Prompts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="storage-used-stat">0 KB</div>
+                        <div class="stat-label">Storage Used</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>About</h2>
+                <div class="about-info">
+                    <p><strong>Version:</strong> 1.0.0</p>
+                    <p><strong>Author:</strong> LLM Prompt Manager</p>
+                    <p><strong>Support:</strong> <a href="#" id="help-link">Help & Documentation</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-footer">
+            <button id="reset-settings-btn" class="btn btn-outline">Reset to Defaults</button>
+            <button id="save-settings-btn" class="btn btn-primary">Save Settings</button>
+        </div>
+    </div>
+
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+    <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Manager</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <div class="popup-header">
+            <h1>🤖 Prompt Manager</h1>
+            <div class="popup-stats">
+                <span id="prompt-count">0 prompt salvati</span>
+            </div>
+        </div>
+
+        <div class="popup-actions">
+            <button id="view-prompts" class="action-btn primary">
+                📁 Visualizza Prompt
+            </button>
+            <button id="export-prompts" class="action-btn secondary">
+                📤 Esporta
+            </button>
+            <button id="import-prompts" class="action-btn secondary">
+                📥 Importa
+            </button>
+        </div>
+
+        <div class="popup-section">
+            <h3>Prompt Recenti</h3>
+            <div id="recent-prompts" class="recent-prompts">
+                <div class="no-prompts">Nessun prompt salvato</div>
+            </div>
+        </div>
+
+        <div class="popup-section">
+            <h3>Statistiche</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-prompts">0</div>
+                    <div class="stat-label">Totale</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="this-week">0</div>
+                    <div class="stat-label">Questa settimana</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="favorite-site">-</div>
+                    <div class="stat-label">Sito preferito</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-footer">
+            <div class="footer-links">
+                <button id="settings-btn" class="link-btn">⚙️ Impostazioni</button>
+                <button id="help-btn" class="link-btn">❓ Aiuto</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+    <script src="popup.js"></script>
+</body>
+</html>

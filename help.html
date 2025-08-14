@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Manager - Help</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .help-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .help-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .help-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .help-content {
+            padding: 40px;
+        }
+        
+        .help-section {
+            margin-bottom: 40px;
+        }
+        
+        .help-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        
+        .help-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 12px;
+        }
+        
+        .help-section p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: #6b7280;
+        }
+        
+        .help-section ul {
+            margin-bottom: 16px;
+            padding-left: 20px;
+        }
+        
+        .help-section li {
+            margin-bottom: 8px;
+            color: #6b7280;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .feature-card {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .feature-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .keyboard-shortcut {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #374151;
+        }
+        
+        .site-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .site-badge {
+            background: #4f46e5;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .code-block {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+        
+        .back-button {
+            background: #4f46e5;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 24px;
+        }
+        
+        .back-button:hover {
+            background: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="help-container">
+        <div class="help-header">
+            <h1>🤖 LLM Prompt Manager - Help</h1>
+            <p>Everything you need to know about using the extension</p>
+        </div>
+        
+        <div class="help-content">
+            <div class="help-section">
+                <h2>Getting Started</h2>
+                <p>The LLM Prompt Manager extension helps you save, organize, and reuse prompts across different AI chat platforms. Once installed, it automatically detects supported LLM sites and adds helpful buttons to the interface.</p>
+                
+                <h3>Quick Start Guide</h3>
+                <ol>
+                    <li>Visit any supported LLM site (ChatGPT, Claude, etc.)</li>
+                    <li>Look for the three buttons that appear near the text input: 💾 📁 ✨</li>
+                    <li>Type your prompt and click 💾 to save it</li>
+                    <li>Click 📁 to load previously saved prompts</li>
+                    <li>Click ✨ to get suggestions for improving your prompt</li>
+                </ol>
+            </div>
+
+            <div class="help-section">
+                <h2>Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>💾 Save Prompts</h4>
+                        <p>Instantly save your prompts with a single click. Each prompt is automatically tagged with the site it was created on and timestamped.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📁 Load Prompts</h4>
+                        <p>Browse and search through your saved prompts. Click to load them directly into the chat input, or copy them to clipboard.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>✨ Improve Prompts</h4>
+                        <p>Get intelligent suggestions to make your prompts more effective, including tips for specificity, context, and formatting.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🔍 Search & Filter</h4>
+                        <p>Quickly find specific prompts using the built-in search functionality that looks through titles and content.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📤 Export & Import</h4>
+                        <p>Backup your prompts or sync between devices by exporting to JSON format. Import prompts from backup files.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📊 Statistics</h4>
+                        <p>Track your prompt usage, see which sites you use most, and monitor your prompt collection growth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h2>Supported Sites</h2>
+                <div class="site-list">
+                    <div class="site-badge">ChatGPT</div>
+                    <div class="site-badge">Claude</div>
+                    <div class="site-badge">Mistral AI</div>
+                    <div class="site-badge">Google Gemini</div>
+                    <div class="site-badge">Microsoft Copilot</div>
+                    <div class="site-badge">Poe</div>
+                    <div class="site-badge">Perplexity</div>
+                </div>
+                <p>You can also add custom sites in the Settings page. The extension will attempt to detect text input areas automatically.</p>
+            </div>
+
+            <div class="help-section">
+                <h2>Using the Popup</h2>
+                <p>Click the extension icon in your browser toolbar to open the popup interface:</p>
+                <ul>
+                    <li><strong>Recent Prompts:</strong> See your most recently saved prompts</li>
+                    <li><strong>Statistics:</strong> View your prompt count and usage patterns</li>
+                    <li><strong>Export/Import:</strong> Backup or restore your prompt collection</li>
+                    <li><strong>Settings:</strong> Customize the extension behavior</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h2>Settings & Customization</h2>
+                <p>Access settings through the popup or by clicking the ⚙️ Settings button:</p>
+                
+                <h3>General Settings</h3>
+                <ul>
+                    <li><strong>Auto-save:</strong> Automatically save prompts when you send messages</li>
+                    <li><strong>Notifications:</strong> Enable/disable success and error notifications</li>
+                    <li><strong>Button Tooltips:</strong> Show helpful hints when hovering over buttons</li>
+                </ul>
+
+                <h3>Site Management</h3>
+                <ul>
+                    <li><strong>Enable/Disable Sites:</strong> Control which sites the extension is active on</li>
+                    <li><strong>Add Custom Sites:</strong> Add support for additional AI chat platforms</li>
+                    <li><strong>Remove Sites:</strong> Remove custom sites you no longer use</li>
+                </ul>
+
+                <h3>Prompt Management</h3>
+                <ul>
+                    <li><strong>Max Prompts:</strong> Set the maximum number of prompts to keep</li>
+                    <li><strong>Default Tags:</strong> Automatically tag new prompts with specified labels</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h2>Data & Privacy</h2>
+                <p>Your privacy is important:</p>
+                <ul>
+                    <li><strong>Local Storage:</strong> All prompts are stored locally in your browser</li>
+                    <li><strong>No External Servers:</strong> No data is sent to external servers</li>
+                    <li><strong>Your Control:</strong> Export, import, or delete your data at any time</li>
+                    <li><strong>Open Source:</strong> The extension code is transparent and auditable</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Buttons Not Appearing</h3>
+                <p>If the save/load buttons don't appear on a supported site:</p>
+                <ul>
+                    <li>Refresh the page and wait a few seconds</li>
+                    <li>Check if the site is enabled in Settings</li>
+                    <li>Try clicking in the text input area to trigger detection</li>
+                    <li>The extension may need time to detect dynamic page changes</li>
+                </ul>
+
+                <h3>Prompts Not Saving</h3>
+                <ul>
+                    <li>Make sure you have text in the input field before clicking save</li>
+                    <li>Check your browser's storage settings</li>
+                    <li>Try reloading the extension in chrome://extensions/</li>
+                </ul>
+
+                <h3>Site Not Supported</h3>
+                <ul>
+                    <li>Try adding the site manually in Settings</li>
+                    <li>Use the context menu to save selected text as prompts</li>
+                    <li>Contact support to request official support for the site</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h2>Tips & Best Practices</h2>
+                <ul>
+                    <li><strong>Organize with Tags:</strong> Use consistent tags to categorize your prompts</li>
+                    <li><strong>Descriptive Titles:</strong> Edit prompt titles to make them more searchable</li>
+                    <li><strong>Regular Backups:</strong> Export your prompts periodically for safekeeping</li>
+                    <li><strong>Use Search:</strong> Take advantage of the search function to find prompts quickly</li>
+                    <li><strong>Improve Iteratively:</strong> Use the improve feature to refine your prompts over time</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h2>Keyboard Shortcuts</h2>
+                <p>When the prompt selector modal is open:</p>
+                <ul>
+                    <li><span class="keyboard-shortcut">ESC</span> - Close the modal</li>
+                    <li><span class="keyboard-shortcut">Enter</span> - Load selected prompt</li>
+                    <li><span class="keyboard-shortcut">Ctrl+C</span> - Copy selected prompt</li>
+                </ul>
+            </div>
+
+            <button class="back-button" onclick="history.back()">← Back to Settings</button>
+        </div>
+    </div>
+</body>
+</html>
