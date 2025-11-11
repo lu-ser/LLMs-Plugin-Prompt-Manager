@@ -9,7 +9,7 @@
 <body>
     <div class="settings-container">
         <div class="settings-header">
-            <h1>🤖 LLM Prompt Manager Settings</h1>
+            <h1>LLM Prompt Manager Settings</h1>
             <p>Customize your prompt management experience</p>
         </div>
 
@@ -47,19 +47,83 @@
 
             <div class="settings-section">
                 <h2>Supported Sites</h2>
-                <p class="section-description">Manage which sites the extension is active on. You can add custom sites or disable existing ones.</p>
-                
+                <p class="section-description">The extension works on these AI chat platforms. Each site has been tested and optimized for compatibility.</p>
+
                 <div id="sites-list" class="sites-list">
                     <!-- Sites will be populated by JavaScript -->
                 </div>
+
+                <div class="info-box" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; color: #0c4a6e;">
+                    <strong>Note:</strong> Custom sites are not supported as each AI platform requires specific HTML selectors to function properly. The extension is carefully configured for each supported platform.
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>AI Integration</h2>
+                <p class="section-description">Configure API keys for AI-powered prompt improvements and integrations.</p>
                 
-                <div class="add-site-section">
-                    <h3>Add Custom Site</h3>
-                    <div class="add-site-form">
-                        <input type="text" id="site-url" placeholder="https://example.com" class="site-input">
-                        <input type="text" id="site-name" placeholder="Site Name" class="site-input">
-                        <button id="add-site-btn" class="btn btn-primary">Add Site</button>
+                <div class="api-keys-section">
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            OpenAI API Key:
+                            <input type="password" id="openai-api-key" placeholder="sk-..." class="setting-input api-key-input">
+                        </label>
+                        <p class="setting-description">Used for GPT-powered prompt improvements</p>
                     </div>
+
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Anthropic API Key:
+                            <input type="password" id="anthropic-api-key" placeholder="sk-ant-..." class="setting-input api-key-input">
+                        </label>
+                        <p class="setting-description">Used for Claude-powered prompt improvements</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Groq API Key:
+                            <input type="password" id="groq-api-key" placeholder="gsk_..." class="setting-input api-key-input">
+                        </label>
+                        <p class="setting-description">Used for fast Groq-powered prompt improvements</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Google AI API Key:
+                            <input type="password" id="google-api-key" placeholder="AI..." class="setting-input api-key-input">
+                        </label>
+                        <p class="setting-description">Used for Gemini-powered prompt improvements</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Preferred AI Service:
+                            <select id="preferred-ai-service" class="setting-select">
+                                <option value="openai">OpenAI GPT</option>
+                                <option value="anthropic">Anthropic Claude</option>
+                                <option value="groq">Groq</option>
+                                <option value="google">Google Gemini</option>
+                            </select>
+                        </label>
+                        <p class="setting-description">Default AI service for prompt improvements</p>
+                    </div>
+                </div>
+
+                <div class="models-section">
+                    <div class="models-header">
+                        <div>
+                            <h3>AI Models Configuration</h3>
+                            <p class="section-description">Select specific models for each AI provider.</p>
+                        </div>
+                        <button id="refresh-models-btn" class="btn btn-secondary btn-small">
+                            Refresh Models
+                        </button>
+                    </div>
+                    
+                    <div id="models-container">
+                        <!-- Models will be populated by JavaScript -->
+                    </div>
+                </div>
                 </div>
             </div>
 
@@ -88,13 +152,13 @@
                 
                 <div class="data-actions">
                     <button id="export-all-btn" class="btn btn-secondary">
-                        📤 Export All Data
+                        Export All Data
                     </button>
                     <button id="import-data-btn" class="btn btn-secondary">
-                        📥 Import Data
+                        Import Data
                     </button>
                     <button id="clear-all-btn" class="btn btn-danger">
-                        🗑️ Clear All Data
+                        Clear All Data
                     </button>
                 </div>
                 
@@ -127,6 +191,7 @@
     </div>
 
     <input type="file" id="import-file" accept=".json" style="display: none;">
+    <script src="models-config.js"></script>
     <script src="settings.js"></script>
 </body>
 </html>

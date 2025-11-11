@@ -6,7 +6,20 @@ class SettingsManager {
       buttonTooltips: true,
       maxPrompts: 500,
       defaultTags: [],
-      customSites: []
+      customSites: [],
+      apiKeys: {
+        openai: '',
+        anthropic: '',
+        groq: '',
+        google: ''
+      },
+      preferredAiService: 'openai',
+      selectedModels: {
+        openai: 'gpt-4o-mini',
+        anthropic: 'claude-3-5-sonnet-20241022',
+        groq: 'llama-3.1-8b-instant',
+        google: 'gemini-1.5-flash'
+      }
     };
     
     this.defaultSites = [
@@ -14,9 +27,7 @@ class SettingsManager {
       { name: 'Claude', url: 'https://claude.ai/*', enabled: true, removable: false },
       { name: 'Mistral', url: 'https://chat.mistral.ai/*', enabled: true, removable: false },
       { name: 'Gemini', url: 'https://gemini.google.com/*', enabled: true, removable: false },
-      { name: 'Copilot', url: 'https://copilot.microsoft.com/*', enabled: true, removable: false },
-      { name: 'Poe', url: 'https://poe.com/*', enabled: true, removable: false },
-      { name: 'Perplexity', url: 'https://perplexity.ai/*', enabled: true, removable: false }
+      { name: 'Copilot', url: 'https://copilot.microsoft.com/*', enabled: true, removable: false }
     ];
     
     this.init();
@@ -26,6 +37,7 @@ class SettingsManager {
     await this.loadSettings();
     await this.loadStats();
     this.renderSites();
+    this.renderModels();
     this.setupEventListeners();
   }
 
@@ -41,6 +53,59 @@ class SettingsManager {
     document.getElementById('button-tooltips').checked = this.settings.buttonTooltips;
     document.getElementById('max-prompts').value = this.settings.maxPrompts;
     document.getElementById('default-tags').value = this.settings.defaultTags.join(', ');
+    
+    // API Keys
+    document.getElementById('openai-api-key').value = this.settings.apiKeys?.openai || '';
+    document.getElementById('anthropic-api-key').value = this.settings.apiKeys?.anthropic || '';
+    document.getElementById('groq-api-key').value = this.settings.apiKeys?.groq || '';
+    document.getElementById('google-api-key').value = this.settings.apiKeys?.google || '';
+    document.getElementById('preferred-ai-service').value = this.settings.preferredAiService || 'openai';
+    
+    // Populate selected models
+    this.populateSelectedModels();
+  }
+  
+  populateSelectedModels() {
+    if (!window.AI_MODELS) return;
+    
+    Object.keys(window.AI_MODELS).forEach(provider => {
+      const select = document.getElementById(`model-${provider}`);
+      if (select && this.settings.selectedModels) {
+        select.value = this.settings.selectedModels[provider] || window.AI_MODELS[provider].defaultModel;
+      }
+    });
+  }
+  
+  renderModels() {
+    if (!window.AI_MODELS) {
+      console.warn('AI_MODELS not loaded');
+      return;
+    }
+    
+    const container = document.getElementById('models-container');
+    if (!container) return;
+    
+    container.innerHTML = Object.entries(window.AI_MODELS).map(([provider, config]) => `
+      <div class="model-provider">
+        <h4 class="provider-title">${config.name}</h4>
+        <div class="setting-item">
+          <label class="setting-label">
+            Model:
+            <select id="model-${provider}" class="setting-select model-select" data-provider="${provider}">
+              ${config.models.map(model => `
+                <option value="${model.id}" title="${model.description}">
+                  ${model.name}${model.description ? ` - ${model.description}` : ''}
+                </option>
+              `).join('')}
+            </select>
+          </label>
+          <p class="setting-description">Choose the ${config.name} model for AI tasks</p>
+        </div>
+      </div>
+    `).join('');
+    
+    // Populate with current selections
+    this.populateSelectedModels();
   }
 
   async loadStats() {
@@ -57,9 +122,8 @@ class SettingsManager {
 
   renderSites() {
     const sitesList = document.getElementById('sites-list');
-    const allSites = [...this.defaultSites, ...this.settings.customSites];
-    
-    sitesList.innerHTML = allSites.map((site, index) => `
+
+    sitesList.innerHTML = this.defaultSites.map((site) => `
       <div class="site-item">
         <div class="site-info">
           <div class="site-icon">${site.name.charAt(0)}</div>
@@ -69,30 +133,24 @@ class SettingsManager {
           </div>
         </div>
         <div class="site-controls">
-          <div class="site-toggle ${site.enabled ? 'active' : ''}" data-index="${index}"></div>
-          ${site.removable !== false ? `<button class="remove-site-btn" data-index="${index}">Remove</button>` : ''}
+          <span style="color: #059669; font-weight: 500;">✓ Active</span>
         </div>
       </div>
     `).join('');
   }
 
   setupEventListeners() {
-    // Site toggles
+    // Site toggles (disabled - all sites are always enabled)
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('site-toggle')) {
         const index = parseInt(e.target.dataset.index);
         this.toggleSite(index);
       }
-      
+
       if (e.target.classList.contains('remove-site-btn')) {
         const index = parseInt(e.target.dataset.index);
         this.removeSite(index);
       }
-    });
-
-    // Add site
-    document.getElementById('add-site-btn').addEventListener('click', () => {
-      this.addCustomSite();
     });
 
     // Data management
@@ -126,55 +184,19 @@ class SettingsManager {
       e.preventDefault();
       this.openHelp();
     });
+
+    // Refresh models
+    document.getElementById('refresh-models-btn').addEventListener('click', () => {
+      this.refreshModels();
+    });
   }
 
   toggleSite(index) {
-    if (index < this.defaultSites.length) {
-      this.defaultSites[index].enabled = !this.defaultSites[index].enabled;
-    } else {
-      const customIndex = index - this.defaultSites.length;
-      this.settings.customSites[customIndex].enabled = !this.settings.customSites[customIndex].enabled;
-    }
-    this.renderSites();
+    // Sites cannot be toggled - kept for backward compatibility
   }
 
   removeSite(index) {
-    if (index >= this.defaultSites.length) {
-      const customIndex = index - this.defaultSites.length;
-      this.settings.customSites.splice(customIndex, 1);
-      this.renderSites();
-    }
-  }
-
-  addCustomSite() {
-    const url = document.getElementById('site-url').value.trim();
-    const name = document.getElementById('site-name').value.trim();
-    
-    if (!url || !name) {
-      this.showNotification('Please enter both URL and name', 'error');
-      return;
-    }
-    
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      this.showNotification('URL must start with http:// or https://', 'error');
-      return;
-    }
-    
-    const newSite = {
-      name: name,
-      url: url.endsWith('/*') ? url : url + '/*',
-      enabled: true,
-      removable: true
-    };
-    
-    this.settings.customSites.push(newSite);
-    this.renderSites();
-    
-    // Clear form
-    document.getElementById('site-url').value = '';
-    document.getElementById('site-name').value = '';
-    
-    this.showNotification('Custom site added successfully!', 'success');
+    // Sites cannot be removed - kept for backward compatibility
   }
 
   async exportAllData() {
@@ -246,7 +268,15 @@ class SettingsManager {
       maxPrompts: parseInt(document.getElementById('max-prompts').value),
       defaultTags: document.getElementById('default-tags').value.split(',').map(t => t.trim()).filter(t => t),
       customSites: this.settings.customSites,
-      enabledSites: this.getEnabledSites()
+      enabledSites: this.getEnabledSites(),
+      apiKeys: {
+        openai: document.getElementById('openai-api-key').value.trim(),
+        anthropic: document.getElementById('anthropic-api-key').value.trim(),
+        groq: document.getElementById('groq-api-key').value.trim(),
+        google: document.getElementById('google-api-key').value.trim()
+      },
+      preferredAiService: document.getElementById('preferred-ai-service').value,
+      selectedModels: this.getSelectedModels()
     };
     
     await chrome.storage.local.set({ 'llm-settings': formData });
@@ -264,6 +294,22 @@ class SettingsManager {
       name: site.name,
       url: site.url
     }));
+  }
+  
+  getSelectedModels() {
+    const selectedModels = {};
+    if (!window.AI_MODELS) return selectedModels;
+    
+    Object.keys(window.AI_MODELS).forEach(provider => {
+      const select = document.getElementById(`model-${provider}`);
+      if (select) {
+        selectedModels[provider] = select.value;
+      } else {
+        selectedModels[provider] = window.AI_MODELS[provider].defaultModel;
+      }
+    });
+    
+    return selectedModels;
   }
 
   async updateSitePermissions() {
@@ -289,6 +335,29 @@ class SettingsManager {
 
   openHelp() {
     chrome.tabs.create({ url: chrome.runtime.getURL('help.html') });
+  }
+
+  refreshModels() {
+    // Force reload of models configuration
+    const script = document.createElement('script');
+    script.src = chrome.runtime.getURL('models-config.js') + '?t=' + Date.now(); // Cache busting
+    
+    // Remove old script
+    const existingScript = document.querySelector('script[src*="models-config.js"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    script.onload = () => {
+      this.renderModels();
+      this.showNotification('Models refreshed successfully!', 'success');
+    };
+    
+    script.onerror = () => {
+      this.showNotification('Failed to refresh models', 'error');
+    };
+    
+    document.head.appendChild(script);
   }
 
   showNotification(message, type = 'info') {

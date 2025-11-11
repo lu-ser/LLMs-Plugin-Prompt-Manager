@@ -77,7 +77,8 @@ class PromptsManager {
       // Search filter
       const searchMatch = !this.searchQuery || 
                          prompt.title.toLowerCase().includes(this.searchQuery) ||
-                         prompt.content.toLowerCase().includes(this.searchQuery);
+                         prompt.content.toLowerCase().includes(this.searchQuery) ||
+                         (prompt.tags && prompt.tags.some(tag => tag.toLowerCase().includes(this.searchQuery)));
 
       return siteMatch && searchMatch;
     });
@@ -108,6 +109,7 @@ class PromptsManager {
             <span>${this.formatDate(prompt.createdAt)}</span>
           </div>
         </div>
+        ${prompt.tags && prompt.tags.length > 0 ? `<div class="prompt-tags">${prompt.tags.map(tag => `<span class="tag">${this.escapeHtml(tag)}</span>`).join('')}</div>` : ''}
         <div class="prompt-content">${this.escapeHtml(prompt.content)}</div>
         <div class="prompt-actions">
           <button class="btn btn-small btn-copy">📋 Copy</button>
@@ -229,9 +231,7 @@ class PromptsManager {
       'claude': 'Claude',
       'mistral': 'Mistral',
       'gemini': 'Gemini',
-      'copilot': 'Copilot',
-      'poe': 'Poe',
-      'perplexity': 'Perplexity'
+      'copilot': 'Copilot'
     };
     return siteNames[site] || site.charAt(0).toUpperCase() + site.slice(1);
   }

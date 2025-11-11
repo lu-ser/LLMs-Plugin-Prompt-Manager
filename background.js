@@ -20,9 +20,7 @@ chrome.action.onClicked.addListener(async (tab) => {
     'claude.ai',
     'chat.mistral.ai',
     'gemini.google.com',
-    'copilot.microsoft.com',
-    'poe.com',
-    'perplexity.ai'
+    'copilot.microsoft.com'
   ];
   
   const isLLMSite = llmSites.some(site => tab.url.includes(site));
@@ -84,12 +82,12 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         const prompts = result['llm-prompts'] || [];
         prompts.unshift(prompt);
         chrome.storage.local.set({ 'llm-prompts': prompts });
-        
+
         chrome.notifications.create({
           type: 'basic',
           iconUrl: 'icons/icon48.png',
-          title: 'Prompt Salvato',
-          message: 'Testo selezionato salvato come prompt'
+          title: 'Prompt Saved',
+          message: 'Selected text saved as prompt'
         });
       });
     }
@@ -99,7 +97,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'save-selection',
-    title: 'Salva come prompt',
+    title: 'Save as prompt',
     contexts: ['selection']
   });
 });

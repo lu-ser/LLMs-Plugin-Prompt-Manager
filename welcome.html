@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benvenuto - LLM Prompt Manager</title>
+    <title>Welcome - LLM Prompt Manager</title>
     <style>
         * {
             margin: 0;
@@ -59,10 +59,12 @@
         }
         
         .feature-icon {
-            font-size: 24px;
+            font-size: 14px;
+            font-weight: 600;
             margin-right: 16px;
-            width: 40px;
+            width: 60px;
             text-align: center;
+            color: #4f46e5;
         }
         
         .feature-text {
@@ -127,68 +129,71 @@
 <body>
     <div class="welcome-container">
         <div class="welcome-header">
-            <h1>🤖 LLM Prompt Manager</h1>
-            <p>Il tuo assistente per gestire e migliorare i prompt AI</p>
+            <h1>LLM Prompt Manager</h1>
+            <p>Your assistant for managing and improving AI prompts</p>
         </div>
-        
+
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">💾</div>
+                <div class="feature-icon">Save</div>
                 <div class="feature-text">
-                    <div class="feature-title">Salva i tuoi prompt</div>
-                    <div class="feature-desc">Salva automaticamente i prompt che funzionano meglio</div>
+                    <div class="feature-title">Save your prompts</div>
+                    <div class="feature-desc">Automatically save prompts that work best</div>
                 </div>
             </div>
-            
+
             <div class="feature">
-                <div class="feature-icon">🔍</div>
+                <div class="feature-icon">Search</div>
                 <div class="feature-text">
-                    <div class="feature-title">Ricerca intelligente</div>
-                    <div class="feature-desc">Trova rapidamente i prompt salvati con la ricerca avanzata</div>
+                    <div class="feature-title">Smart search</div>
+                    <div class="feature-desc">Quickly find saved prompts with advanced search</div>
                 </div>
             </div>
-            
+
             <div class="feature">
-                <div class="feature-icon">✨</div>
+                <div class="feature-icon">Improve</div>
                 <div class="feature-text">
-                    <div class="feature-title">Migliora i prompt</div>
-                    <div class="feature-desc">Suggerimenti automatici per rendere i tuoi prompt più efficaci</div>
+                    <div class="feature-title">Improve prompts</div>
+                    <div class="feature-desc">Automatic suggestions to make your prompts more effective</div>
                 </div>
             </div>
-            
+
             <div class="feature">
-                <div class="feature-icon">📋</div>
+                <div class="feature-icon">Copy</div>
                 <div class="feature-text">
-                    <div class="feature-title">Copia veloce</div>
-                    <div class="feature-desc">Copia i prompt negli appunti con un solo clic</div>
+                    <div class="feature-title">Quick copy</div>
+                    <div class="feature-desc">Copy prompts to clipboard with one click</div>
                 </div>
             </div>
-            
+
             <div class="feature">
-                <div class="feature-icon">📤</div>
+                <div class="feature-icon">Export</div>
                 <div class="feature-text">
-                    <div class="feature-title">Esporta e importa</div>
-                    <div class="feature-desc">Sincronizza i tuoi prompt tra dispositivi diversi</div>
+                    <div class="feature-title">Export and import</div>
+                    <div class="feature-desc">Sync your prompts across different devices</div>
                 </div>
             </div>
         </div>
-        
+
         <div class="supported-sites">
-            <h3>Siti supportati</h3>
+            <h3>Supported sites</h3>
             <div class="sites-grid">
                 <div class="site-badge">ChatGPT</div>
                 <div class="site-badge">Claude</div>
                 <div class="site-badge">Mistral</div>
                 <div class="site-badge">Gemini</div>
                 <div class="site-badge">Copilot</div>
-                <div class="site-badge">Poe</div>
-                <div class="site-badge">Perplexity</div>
             </div>
         </div>
-        
-        <button class="get-started" onclick="chrome.tabs.create({url: 'https://chat.openai.com'})">
-            Inizia a usare il plugin
+
+        <button class="get-started" id="get-started-btn">
+            Start using the extension
         </button>
     </div>
+    <script>
+        document.getElementById('get-started-btn').addEventListener('click', () => {
+            chrome.tabs.create({url: 'https://chat.openai.com'});
+        });
+    </script>
 </body>
 </html>

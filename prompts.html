@@ -227,11 +227,6 @@
             color: #6b7280;
         }
         
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
         .empty-state h3 {
             font-size: 20px;
             font-weight: 600;
@@ -305,19 +300,19 @@
 <body>
     <div class="prompts-container">
         <div class="prompts-header">
-            <h1>📁 All Saved Prompts</h1>
+            <h1>All Saved Prompts</h1>
             <p>Manage and organize your prompt collection</p>
         </div>
-        
+
         <div class="prompts-toolbar">
             <div class="search-box">
-                <div class="search-icon">🔍</div>
+                <div class="search-icon">Search:</div>
                 <input type="text" id="search-input" class="search-input" placeholder="Search prompts by title or content...">
             </div>
             <div class="toolbar-actions">
-                <button id="export-btn" class="btn btn-secondary">📤 Export</button>
-                <button id="import-btn" class="btn btn-secondary">📥 Import</button>
-                <button id="settings-btn" class="btn btn-primary">⚙️ Settings</button>
+                <button id="export-btn" class="btn btn-secondary">Export</button>
+                <button id="import-btn" class="btn btn-secondary">Import</button>
+                <button id="settings-btn" class="btn btn-primary">Settings</button>
             </div>
         </div>
         
@@ -342,7 +337,6 @@
             </div>
             
             <div id="empty-state" class="empty-state" style="display: none;">
-                <div class="empty-state-icon">📝</div>
                 <h3>No prompts saved yet</h3>
                 <p>Start saving prompts on supported AI chat sites to see them here.</p>
             </div>
