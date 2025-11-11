@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "LLM Prompt Manager",
   "version": "1.0.0",
-  "description": "Plugin per salvare e gestire prompt sui siti di intelligenza artificiale",
+  "description": "Extension to save and manage prompts on AI platforms",
   "permissions": [
     "activeTab",
     "storage",
@@ -16,8 +16,10 @@
     "https://chat.mistral.ai/*",
     "https://gemini.google.com/*",
     "https://copilot.microsoft.com/*",
-    "https://poe.com/*",
-    "https://perplexity.ai/*"
+    "https://api.openai.com/*",
+    "https://api.anthropic.com/*",
+    "https://api.groq.com/*",
+    "https://generativelanguage.googleapis.com/*"
   ],
   "content_scripts": [
     {
@@ -26,12 +28,22 @@
         "https://claude.ai/*",
         "https://chat.mistral.ai/*",
         "https://gemini.google.com/*",
-        "https://copilot.microsoft.com/*",
-        "https://poe.com/*",
-        "https://perplexity.ai/*"
+        "https://copilot.microsoft.com/*"
       ],
       "js": ["content.js"],
       "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["ai-integration.js", "models-config.js"],
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://chat.mistral.ai/*",
+        "https://gemini.google.com/*",
+        "https://copilot.microsoft.com/*"
+      ]
     }
   ],
   "action": {

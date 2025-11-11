@@ -11,52 +11,52 @@ class PopupManager {
 
   async loadStats() {
     const prompts = await this.getStoredPrompts();
-    
-    document.getElementById('prompt-count').textContent = `${prompts.length} prompt salvati`;
+
+    document.getElementById('prompt-count').textContent = `${prompts.length} prompts saved`;
     document.getElementById('total-prompts').textContent = prompts.length;
-    
+
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     const thisWeekCount = prompts.filter(p => new Date(p.createdAt) > oneWeekAgo).length;
     document.getElementById('this-week').textContent = thisWeekCount;
-    
+
     const siteCounts = {};
     prompts.forEach(p => {
       siteCounts[p.site] = (siteCounts[p.site] || 0) + 1;
     });
-    
-    const favoriteSite = Object.keys(siteCounts).reduce((a, b) => 
+
+    const favoriteSite = Object.keys(siteCounts).reduce((a, b) =>
       siteCounts[a] > siteCounts[b] ? a : b, Object.keys(siteCounts)[0] || '-'
     );
-    
+
     document.getElementById('favorite-site').textContent = this.formatSiteName(favoriteSite);
   }
 
   async loadRecentPrompts() {
     const prompts = await this.getStoredPrompts();
     const recentPrompts = prompts.slice(0, 3);
-    
+
     const container = document.getElementById('recent-prompts');
-    
+
     if (recentPrompts.length === 0) {
-      container.innerHTML = '<div class="no-prompts">Nessun prompt salvato</div>';
+      container.innerHTML = '<div class="no-prompts">No prompts saved</div>';
       return;
     }
-    
+
     container.innerHTML = recentPrompts.map(prompt => `
       <div class="prompt-item" data-id="${prompt.id}">
         <div class="prompt-title">${prompt.title}</div>
         <div class="prompt-meta">${this.formatDate(prompt.createdAt)} - ${this.formatSiteName(prompt.site)}</div>
       </div>
     `).join('');
-    
+
     container.querySelectorAll('.prompt-item').forEach(item => {
       item.addEventListener('click', async () => {
         const promptId = item.dataset.id;
         const prompt = prompts.find(p => p.id == promptId);
         if (prompt) {
           await navigator.clipboard.writeText(prompt.content);
-          this.showNotification('Prompt copiato negli appunti!');
+          this.showNotification('Prompt copied to clipboard!');
         }
       });
     });
@@ -90,15 +90,13 @@ class PopupManager {
 
   async openPromptsManager() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    
+
     const llmSites = [
       'chat.openai.com',
       'claude.ai',
       'chat.mistral.ai',
       'gemini.google.com',
-      'copilot.microsoft.com',
-      'poe.com',
-      'perplexity.ai'
+      'copilot.microsoft.com'
     ];
     
     const isLLMSite = llmSites.some(site => tab.url.includes(site));
@@ -113,52 +111,52 @@ class PopupManager {
 
   async exportPrompts() {
     const prompts = await this.getStoredPrompts();
-    
+
     const exportData = {
       version: '1.0',
       exportDate: new Date().toISOString(),
       prompts: prompts
     };
-    
+
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    
+
     const a = document.createElement('a');
     a.href = url;
     a.download = `llm-prompts-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
-    
+
     URL.revokeObjectURL(url);
-    this.showNotification('Prompt esportati con successo!');
+    this.showNotification('Prompts exported successfully!');
   }
 
   async importPrompts(file) {
     if (!file) return;
-    
+
     try {
       const text = await file.text();
       const data = JSON.parse(text);
-      
+
       if (!data.prompts || !Array.isArray(data.prompts)) {
-        throw new Error('Formato file non valido');
+        throw new Error('Invalid file format');
       }
-      
+
       const existingPrompts = await this.getStoredPrompts();
       const newPrompts = data.prompts.map(p => ({
         ...p,
         id: Date.now() + Math.random(),
         imported: true
       }));
-      
+
       const mergedPrompts = [...newPrompts, ...existingPrompts];
       await chrome.storage.local.set({ 'llm-prompts': mergedPrompts });
-      
+
       await this.loadStats();
       await this.loadRecentPrompts();
-      
-      this.showNotification(`Importati ${newPrompts.length} prompt!`);
+
+      this.showNotification(`Imported ${newPrompts.length} prompts!`);
     } catch (error) {
-      this.showNotification('Errore durante l\'importazione', 'error');
+      this.showNotification('Error importing file', 'error');
     }
   }
 
@@ -181,9 +179,7 @@ class PopupManager {
       'claude': 'Claude',
       'mistral': 'Mistral',
       'gemini': 'Gemini',
-      'copilot': 'Copilot',
-      'poe': 'Poe',
-      'perplexity': 'Perplexity'
+      'copilot': 'Copilot'
     };
     return siteNames[site] || site;
   }
@@ -193,12 +189,12 @@ class PopupManager {
     const now = new Date();
     const diffTime = Math.abs(now - date);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 1) return 'Oggi';
-    if (diffDays === 2) return 'Ieri';
-    if (diffDays <= 7) return `${diffDays} giorni fa`;
-    
-    return date.toLocaleDateString('it-IT');
+
+    if (diffDays === 1) return 'Today';
+    if (diffDays === 2) return 'Yesterday';
+    if (diffDays <= 7) return `${diffDays} days ago`;
+
+    return date.toLocaleDateString('en-US');
   }
 
   showNotification(message, type = 'success') {

@@ -1,162 +1,160 @@
-# 🤖 LLM Prompt Manager
+# LLM Prompt Manager
 
-Un plugin per Chrome che permette di salvare, gestire e migliorare i prompt utilizzati sui principali siti di intelligenza artificiale.
+A Chrome extension for saving, managing, and improving prompts on AI platforms.
 
-## ✨ Funzionalità
+## Features
 
-- **💾 Salvataggio automatico**: Salva i tuoi prompt preferiti con un solo clic
-- **🔍 Ricerca avanzata**: Trova rapidamente i prompt salvati tramite ricerca per titolo o contenuto
-- **✨ Miglioramento prompt**: Suggerimenti automatici per rendere i prompt più efficaci
-- **📋 Copia veloce**: Copia i prompt negli appunti direttamente dal popup
-- **📤 Esporta/Importa**: Sincronizza i prompt tra dispositivi diversi
-- **📊 Statistiche**: Visualizza statistiche d'uso e prompt più utilizzati
+- **Quick Save**: Save your favorite prompts with one click
+- **Smart Search**: Find saved prompts by title or content
+- **Prompt Enhancement**: AI-powered suggestions to improve your prompts
+- **Quick Copy**: Copy prompts to clipboard directly from the popup
+- **Export/Import**: Sync prompts across different devices
+- **Statistics**: View usage stats and most-used prompts
 
-## 🌐 Siti Supportati
+## Supported Sites
 
 - ChatGPT (chat.openai.com)
 - Claude (claude.ai)
 - Mistral (chat.mistral.ai)
 - Gemini (gemini.google.com)
 - Microsoft Copilot (copilot.microsoft.com)
-- Poe (poe.com)
-- Perplexity (perplexity.ai)
 
-## 🚀 Installazione
+## Installation
 
-### Installazione da Chrome Web Store (quando disponibile)
-1. Vai al Chrome Web Store
-2. Cerca "LLM Prompt Manager"
-3. Clicca su "Aggiungi a Chrome"
+### From Chrome Web Store (when available)
+1. Go to Chrome Web Store
+2. Search for "LLM Prompt Manager"
+3. Click "Add to Chrome"
 
-### Installazione manuale (sviluppo)
-1. Clona o scarica questo repository
-2. Apri Chrome e vai su `chrome://extensions/`
-3. Attiva la "Modalità sviluppatore" in alto a destra
-4. Clicca su "Carica estensione non pacchettizzata"
-5. Seleziona la cartella del progetto
+### Manual Installation (development)
+1. Clone or download this repository
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode" in the top right
+4. Click "Load unpacked"
+5. Select the project folder
 
-## 📱 Come Usare
+## How to Use
 
-### Su un sito LLM supportato:
-1. Scrivi il tuo prompt nella casella di testo
-2. Clicca sul pulsante 💾 per salvare il prompt
-3. Usa 📁 per caricare un prompt salvato
-4. Usa ✨ per ottenere suggerimenti di miglioramento
+### On a supported LLM site:
+1. Write your prompt in the text box
+2. Click the save button to save the prompt
+3. Use the load button to retrieve a saved prompt
+4. Use the improve button to get enhancement suggestions
 
-### Dal popup del plugin:
-1. Clicca sull'icona del plugin nella barra degli strumenti
-2. Visualizza le statistiche e i prompt recenti
-3. Esporta o importa i tuoi prompt
-4. Gestisci tutti i prompt salvati
+### From the extension popup:
+1. Click the extension icon in the toolbar
+2. View statistics and recent prompts
+3. Export or import your prompts
+4. Manage all saved prompts
 
-### Menu contestuale:
-1. Seleziona del testo su qualsiasi pagina web
-2. Clic destro → "Salva come prompt"
+### Context menu:
+1. Select text on any webpage
+2. Right-click → "Save as prompt"
 
-## 🔧 Funzionalità Dettagliate
+## Detailed Features
 
-### Salvataggio Prompt
-- Salvataggio automatico con titolo generato
-- Associazione al sito di origine
-- Timestamp di creazione
-- Sistema di tag (futuro)
+### Prompt Saving
+- Auto-save with generated title
+- Associated with source site
+- Creation timestamp
+- Tag system (future)
 
-### Gestione Prompt
-- Visualizzazione lista completa
-- Ricerca per titolo o contenuto
-- Ordinamento per data o frequenza d'uso
-- Eliminazione selettiva
+### Prompt Management
+- View complete list
+- Search by title or content
+- Sort by date or usage frequency
+- Selective deletion
 
-### Esportazione/Importazione
-- Formato JSON standard
-- Compatibilità tra dispositivi
-- Backup dei dati
-- Merge intelligente durante l'importazione
+### Export/Import
+- Standard JSON format
+- Cross-device compatibility
+- Data backup
+- Smart merge during import
 
-## 🗂️ Struttura del Progetto
+## Project Structure
 
 ```
 Plugin_Prompt/
-├── manifest.json          # Configurazione del plugin
-├── content.js             # Script per l'interazione con le pagine
-├── background.js           # Service worker per gestione eventi
-├── popup.html/css/js       # Interfaccia popup del plugin
-├── styles.css              # Stili per content script
-├── welcome.html            # Pagina di benvenuto
-├── icons/                  # Icone del plugin
-└── README.md              # Documentazione
+├── manifest.json          # Extension configuration
+├── content.js             # Page interaction scripts
+├── background.js          # Service worker for event handling
+├── popup.html/css/js      # Extension popup interface
+├── styles.css             # Content script styles
+├── welcome.html           # Welcome page
+├── icons/                 # Extension icons
+└── README.md             # Documentation
 ```
 
-## 🛠️ Sviluppo
+## Development
 
-### Prerequisiti
+### Prerequisites
 - Google Chrome
-- Editor di codice
+- Code editor
 
-### Setup locale
-1. Clona il repository
-2. Apri Chrome e attiva la modalità sviluppatore
-3. Carica l'estensione non pacchettizzata
-4. Le modifiche al codice richiedono il reload dell'estensione
+### Local Setup
+1. Clone the repository
+2. Open Chrome and enable developer mode
+3. Load unpacked extension
+4. Code changes require extension reload
 
 ### Testing
-- Testa su tutti i siti supportati
-- Verifica il salvataggio/caricamento prompt
-- Controlla l'esportazione/importazione
-- Valida l'interfaccia responsive
+- Test on all supported sites
+- Verify prompt save/load
+- Check export/import
+- Validate responsive interface
 
-## 🔒 Privacy e Sicurezza
+## Privacy & Security
 
-- **Dati locali**: Tutti i prompt sono salvati localmente nel browser
-- **Nessun server**: Non vengono inviati dati a server esterni
-- **Permessi minimi**: L'estensione richiede solo i permessi necessari
-- **Open source**: Codice completamente ispezionabile
+- **Local storage**: All prompts are saved locally in your browser
+- **No servers**: No data sent to external servers
+- **Minimal permissions**: Extension only requests necessary permissions
+- **Open source**: Fully inspectable code
 
-## 🚧 Roadmap
+## Roadmap
 
-### Versione 1.1
-- [ ] Sistema di tag per i prompt
-- [ ] Categorie personalizzabili
-- [ ] Modelli di prompt predefiniti
-- [ ] Statistiche avanzate
+### Version 1.1
+- [ ] Tag system for prompts
+- [ ] Customizable categories
+- [ ] Pre-built prompt templates
+- [ ] Advanced statistics
 
-### Versione 1.2
-- [ ] Sincronizzazione cloud opzionale
-- [ ] Condivisione prompt tra utenti
-- [ ] Integrazione con Google Drive
-- [ ] Backup automatico
+### Version 1.2
+- [ ] Optional cloud sync
+- [ ] Share prompts between users
+- [ ] Google Drive integration
+- [ ] Automatic backup
 
-### Versione 2.0
-- [ ] AI per miglioramento automatico prompt
-- [ ] Template intelligenti
-- [ ] Analisi performance prompt
-- [ ] Integrazione con API esterne
+### Version 2.0
+- [ ] AI-powered prompt improvement
+- [ ] Smart templates
+- [ ] Prompt performance analysis
+- [ ] External API integrations
 
-## 🤝 Contributi
+## Contributing
 
-I contributi sono benvenuti! Per contribuire:
+Contributions are welcome! To contribute:
 
-1. Fork del repository
-2. Crea un branch per la feature (`git checkout -b feature/AmazingFeature`)
-3. Commit delle modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licenza
+## License
 
-Questo progetto è rilasciato sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
+This project is released under the MIT License. See the `LICENSE` file for details.
 
-## 👨‍💻 Autore
+## Author
 
-Creato con ❤️ per la community AI
+Created for the AI community
 
-## 🆘 Supporto
+## Support
 
-Per problemi, bug o richieste di funzionalità:
-- Apri un'issue su GitHub
-- Contatta tramite email
-- Documentazione completa disponibile nel wiki
+For issues, bugs, or feature requests:
+- Open an issue on GitHub
+- Contact via email
+- Complete documentation available in the wiki
 
 ---
 
-**Migliora la tua esperienza con l'AI, un prompt alla volta! 🚀**
+**Improve your AI experience, one prompt at a time.**
