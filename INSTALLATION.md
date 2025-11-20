@@ -29,8 +29,6 @@
    - https://chat.mistral.ai (Mistral)
    - https://gemini.google.com (Gemini)
    - https://copilot.microsoft.com (Copilot)
-   - https://poe.com (Poe)
-   - https://perplexity.ai (Perplexity)
 
 2. Look for three buttons near the text input area:
    - 💾 **Save prompt**
